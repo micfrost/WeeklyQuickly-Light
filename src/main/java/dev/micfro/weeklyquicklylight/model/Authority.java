@@ -7,24 +7,22 @@ import jakarta.persistence.*;
 @Table(name = "authorities")
 public class Authority {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-//    @OneToOne(mappedBy = "authority")
-//    private User user;
 
     private String username;
 
     private String authority;
 
-
     // Constructors
     public Authority() {
-
     }
 
+    public Authority(String username, String authority) {
+        this.username = username;
+        this.authority = authority;
+    }
 
     // toString
 

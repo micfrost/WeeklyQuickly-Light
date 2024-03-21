@@ -13,12 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
 
-    @Autowired
-    public HomeController(UserService userService, AuthorityService authorityService, AuthorityRepository authorityRepository) {
-
-    }
-
-
     @GetMapping("/")
     public String home() {
         return "home";

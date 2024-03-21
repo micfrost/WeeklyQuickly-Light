@@ -14,23 +14,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String username;
 
-//    @Column(length = 68)
     private String password;
-
 
     private boolean enabled;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "authority_id")
+    private Authority authority;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "authority_id", referencedColumnName = "id")
-//    private Authority authority;
 
 
     // Constructors
     public User() {
+    }
+
+    public User(String username, String password, boolean enabled) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
     }
 
     // toString
@@ -49,6 +52,14 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
     }
 
     public void setUsername(String username) {

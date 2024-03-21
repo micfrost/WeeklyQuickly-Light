@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+<body>
+<h2>User List</h2>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Roles</th>
+        <th>Enabled</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+<!--        <td th:text="${user.authorities}"></td>-->
+        <td th:text="${user.enabled ? 'Yes' : 'No'}"></td>
+    </tr>
+</table>
+</body>
+</html>
