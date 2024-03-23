@@ -1,0 +1,36 @@
+<!-- customer-form.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Form</title>
+</head>
+<body>
+<h1>Add Customer</h1>
+<form action="#" th:action="@{/add-customer}" th:object="${customer}" method="post">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" th:field="*{user.username}" required>
+    </div>
+    <br> <br>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" th:field="*{user.password}" required>
+    </div>
+
+<!--    firstName-->
+    <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required>
+    </div>
+
+<!--    lastName-->
+    <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

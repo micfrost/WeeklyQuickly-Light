@@ -20,20 +20,35 @@ public class User {
 
     private boolean enabled;
 
+    // Mapping
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "authority_id")
     private Authority authority;
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
 
     // Constructors
     public User() {
     }
 
-    public User(String username, String password, boolean enabled) {
+
+    public User(String username, String password, boolean enabled, Authority authority) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
+        this.authority = authority;
+    }
+
+    public User(String username, String password, boolean enabled, Authority authority, Customer customer) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.authority = authority;
+        this.customer = customer;
     }
 
     // toString
@@ -52,14 +67,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public Authority getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(Authority authority) {
-        this.authority = authority;
     }
 
     public void setUsername(String username) {
@@ -82,4 +89,19 @@ public class User {
         this.enabled = enabled;
     }
 
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

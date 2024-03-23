@@ -2,10 +2,10 @@ package dev.micfro.weeklyquicklylight.model;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "authorities")
 public class Authority {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +15,18 @@ public class Authority {
 
     private String authority;
 
+
+    // Mapping
+    @OneToOne(mappedBy = "authority")
+    private User user;
+
+
     // Constructors
     public Authority() {
+    }
+
+    public Authority(String authority) {
+        this.authority = authority;
     }
 
     public Authority(String username, String authority) {
@@ -24,10 +34,10 @@ public class Authority {
         this.authority = authority;
     }
 
+
     // toString
 
     // Getters and Setters
-
 
     public Long getId() {
         return id;
@@ -51,5 +61,13 @@ public class Authority {
 
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+
 @Controller
 public class UserController {
 
-    private final UserService userService;
-    private final AuthorityService authorityService;
-    private final PasswordEncoder passwordEncoder;
+    UserService userService;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService, AuthorityService authorityService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
-        this.authorityService = authorityService;
         this.passwordEncoder = passwordEncoder;
 
-        // username=admin Password=pass123
-
-        User user = new User("admin", "$2a$12$WsjTze9HY2zZE6j6bMwplOk03LoT762Win452SbixBEkhhiPbCJBO", true);
-        user.setAuthority(new Authority(user.getUsername(), "ROLE_ADMIN"));
-        userService.saveUser(user);
+        userService.createUser(
+                "admin",
+                "$2a$12$H5schs/Xb6ICj4pEZA6mrOrQRV/6vfEGqHtCCkYwUAmU8vtbJcTce",
+                "ROLE_ADMIN");
     }
+
 
     @GetMapping("/user-list")
     public String listUsers(Model model) {
+
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "user-list";
@@ -51,9 +51,7 @@ public class UserController {
     @PostMapping("/add-user")
     public String addUser(@ModelAttribute("user") User user) {
         // PasswordEncoder
-        user.getPassword();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         user.setAuthority(new Authority(user.getUsername(), "ROLE_ADMIN"));
 
