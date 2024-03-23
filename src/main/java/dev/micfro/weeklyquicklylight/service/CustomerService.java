@@ -9,6 +9,8 @@ import dev.micfro.weeklyquicklylight.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
 
@@ -42,7 +44,12 @@ public class CustomerService {
         return user;
     }
 
-    // Save
+    // Read
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
+    }
+
+
 
 
 }

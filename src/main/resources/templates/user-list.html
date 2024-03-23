@@ -10,12 +10,12 @@
     <tr>
         <th>Username</th>
         <th>Roles</th>
-        <th>Enabled</th>
     </tr>
     <tr th:each="user : ${users}">
         <td th:text="${user.username}"></td>
-<!--        <td th:text="${user.authorities}"></td>-->
-        <td th:text="${user.enabled ? 'Yes' : 'No'}"></td>
+        <td th:text="${user.authority.authority}"></td>
+
+
     </tr>
 </table>
 </body>

@@ -33,6 +33,12 @@ public class CustomerController {
                 "Frost");
     }
 
+    @GetMapping("/customer-list")
+    public String listCustomers(Model model) {
+        model.addAttribute("customers", customerService.findAll());
+        return "customer-list";
+    }
+
     @GetMapping("/customer-form")
     public String showCustomerForm(Model model) {
         model.addAttribute("customer", new Customer());
@@ -43,6 +49,7 @@ public class CustomerController {
     public String addCustomer(@ModelAttribute("customer") Customer customer) {
         // PasswordEncoder
         User user = customer.getUser();
+        user.setCustomer(customer);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         user.setAuthority(new Authority(user.getUsername(), "ROLE_CUSTOMER"));
