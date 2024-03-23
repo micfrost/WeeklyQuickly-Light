@@ -3,30 +3,30 @@ package dev.micfro.weeklyquicklylight.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "employees")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String Role = "ROLE_CUSTOMER";
+    private String Role = "ROLE_Employee";
 
     private String firstName;
 
     private String lastName;
 
     // Mapping
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private User user;
 
 
     // Constructors
-    public Customer() {
+    public Employee() {
         user = new User();
     }
 
-    public Customer(String firstName, String lastName) {
+    public Employee(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

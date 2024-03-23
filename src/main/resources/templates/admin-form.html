@@ -1,0 +1,46 @@
+<!-- admin-form.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
+<body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+<div th:align="center">
+
+    <h2>Add Admin</h2>
+
+    <form action="#" th:action="@{/add-admin}" th:object="${admin}" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" th:field="*{user.username}" required>
+        </div>
+        <br>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" th:field="*{user.password}" required>
+        </div>
+        <br>
+        <!--    firstName-->
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required>
+        </div>
+        <br>
+        <!--    lastName-->
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required>
+        </div>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+
+</div>
+
+</body>
+
+</html>

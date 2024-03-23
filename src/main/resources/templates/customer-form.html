@@ -1,12 +1,17 @@
 <!-- customer-form.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Customer Form</title>
-</head>
+
+<th:block th:replace="~{fragments/head :: common-head}"></th:block>
+
 <body>
-<h1>Add Customer</h1>
+
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+
+<div th:align="center">
+
+<h2>Add Customer</h2>
 <form action="#" th:action="@{/add-customer}" th:object="${customer}" method="post">
     <div>
         <label for="username">Username:</label>
@@ -32,5 +37,10 @@
     <br>
     <button type="submit">Submit</button>
 </form>
+
+<th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+
+</div>
 </body>
+
 </html>

@@ -4,7 +4,6 @@ import dev.micfro.weeklyquicklylight.model.Authority;
 import dev.micfro.weeklyquicklylight.model.Customer;
 import dev.micfro.weeklyquicklylight.model.User;
 import dev.micfro.weeklyquicklylight.service.CustomerService;
-import dev.micfro.weeklyquicklylight.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,28 +12,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class CustomerController {
-    UserService userService;
+
     CustomerService customerService;
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    public CustomerController(UserService userService, PasswordEncoder passwordEncoder, CustomerService customerService) {
-        this.userService = userService;
+    public CustomerController(PasswordEncoder passwordEncoder, CustomerService customerService) {
+
         this.passwordEncoder = passwordEncoder;
         this.customerService = customerService;
 
-
+        // password = username
+        String username = "customerjulian";
+        String password = passwordEncoder.encode(username);
         customerService.createCustomer(
-                "customer",
-                "$2a$12$rPHndWTGg.zzfwwIB.797ugF/Wnd1ABv.juxwC06sWDDWH07omOBq",
+                username,
+                password,
                 "Julian",
                 "Frost");
     }
 
     @GetMapping("/customer-list")
     public String listCustomers(Model model) {
+        List<Customer> customers = customerService.findAll();
         model.addAttribute("customers", customerService.findAll());
         return "customer-list";
     }
@@ -52,17 +56,9 @@ public class CustomerController {
         user.setCustomer(customer);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
-        user.setAuthority(new Authority(user.getUsername(), "ROLE_CUSTOMER"));
-
+        user.setAuthority(new Authority(user.getUsername(), customer.getRole()));
         // Save Customer
         customerService.saveCustomer(customer);
-
-
         return "redirect:/customer-list";
     }
 }
-
-
-
-
-

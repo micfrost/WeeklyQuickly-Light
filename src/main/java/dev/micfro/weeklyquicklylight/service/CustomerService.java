@@ -37,7 +37,7 @@ public class CustomerService {
             String firstName,
             String lastName) {
         Customer customer = new Customer(firstName, lastName);
-        Authority authority = new Authority(username, "ROLE_CUSTOMER");
+        Authority authority = new Authority(username, customer.getRole());
         User user = new User(username, password, true, authority, customer);
         userRepository.save(user);
 

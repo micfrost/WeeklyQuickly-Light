@@ -27,8 +27,16 @@ public class User {
 
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
 
     // Constructors
@@ -43,12 +51,29 @@ public class User {
         this.authority = authority;
     }
 
+    public User(String username, String password, boolean enabled, Authority authority, Admin admin) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.authority = authority;
+        this.admin = admin;
+    }
+
+
     public User(String username, String password, boolean enabled, Authority authority, Customer customer) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.authority = authority;
         this.customer = customer;
+    }
+
+    public User(String username, String password, boolean enabled, Authority authority, Employee employee) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.authority = authority;
+        this.employee = employee;
     }
 
     // toString
@@ -97,11 +122,28 @@ public class User {
         this.authority = authority;
     }
 
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

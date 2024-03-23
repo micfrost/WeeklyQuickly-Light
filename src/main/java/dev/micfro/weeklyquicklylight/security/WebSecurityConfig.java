@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 import javax.sql.DataSource;
@@ -18,6 +19,11 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+    @Bean
+    public AuthenticationSuccessHandler customLoginSuccessHandler() {
+        return new CustomLoginSuccessHandler();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -37,12 +43,14 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(config -> config
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/home").permitAll()
                         .requestMatchers("/**").hasAnyRole("ADMIN","CUSTOMER", "EMPLOYEE")
                         .anyRequest().authenticated())
 
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/login-form")
                         .loginProcessingUrl("/authenticate")
+                        .successHandler(customLoginSuccessHandler())
                         .permitAll())
 
                 .logout(logout -> logout

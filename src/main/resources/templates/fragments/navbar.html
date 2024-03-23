@@ -1,0 +1,55 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="head :: common-head"></th:block>
+<body>
+
+
+
+<div th:fragment="common-navbar" th:align="center">
+
+
+  <a th:href="@{/}">home</a>
+  <span> | </span>
+  <a th:href="@{/customer-form}">customer-form</a>
+  <span> | </span>
+  <a th:href="@{/customer-list}">customer-list</a>
+  <span> | </span>
+  <a th:href="@{/employee-form}">employee-form</a>
+  <span> | </span>
+  <a th:href="@{/employee-list}">employee-list</a>
+  <span> | </span>
+  <a th:href="@{/admin-form}">admin-form</a>
+  <span> | </span>
+  <a th:href="@{/admin-list}">admin-list</a>
+  <span> | </span>
+  <a th:href="@{/user-form}">user-form</a>
+  <span> | </span>
+  <a th:href="@{/user-list}">user-list</a>
+  <br>  <br>
+</div>
+
+
+
+
+
+<!--<div th:fragment="header-customer-sites" th:align="center">-->
+<!--  <div th:insert="~{fragments/header :: header}">MICHAL FROST &copy; 2024</div>-->
+<!--  <span>Kudos for you Customer.</span>-->
+<!--</div>-->
+
+
+<!--<div th:fragment="header-employee-sites" th:align="center">-->
+<!--  <div th:insert="~{fragments/header :: header}">MICHAL FROST &copy; 2024</div>-->
+<!--  <span>Kudos for you Employee.</span>-->
+<!--</div>-->
+
+
+<!--<div th:fragment="header-admin-sites" th:align="center">-->
+<!--  <div th:insert="~{fragments/header :: header}">MICHAL FROST &copy; 2024</div>-->
+<!--  <span>Kudos for you Admin. </span><span th:text="${@environment.getProperty('app.version')}"></span>-->
+<!--</div>-->
+
+
+</body>
+</html>
+

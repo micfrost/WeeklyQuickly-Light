@@ -8,10 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 
 
-    @GetMapping("/login")
+    @GetMapping("/login-form")
     public String login() {
-        return "login-page";
+        return "login-form";
     }
+
+
+    @GetMapping("/login-success")
+    public String loginSuccess() {
+        return "login-success";
+    }
+
 }
 
 
