@@ -14,11 +14,11 @@ public class Product {
 
     private String name;
 
-    // OneToMany relationship with an Item
+    // OneToMany Bidirectional
     @OneToMany(mappedBy = "product",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
 
 
     private Long quantity;
