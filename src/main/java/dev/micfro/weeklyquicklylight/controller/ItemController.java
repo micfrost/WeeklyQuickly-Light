@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ItemController {
-    
+
     ItemService itemService;
     ProductService productService;
 
@@ -43,13 +43,10 @@ public class ItemController {
 
         if (itemService.findItemByNameOfProduct(nameOfProduct) != null) {
             Product existingProduct = itemService.findItemByNameOfProduct(nameOfProduct).getProduct();
-                    existingProduct.addItems(item.getQuantity());
+            existingProduct.addItems(item.getQuantity());
             productService.saveProduct(existingProduct);
             return "redirect:/item-list";
         }
-
-
-
 
 
         // if product of this item does not exist, then create a new product
@@ -57,15 +54,6 @@ public class ItemController {
         itemService.saveItem(item);
         return "redirect:/item-list";
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
 }
