@@ -32,7 +32,11 @@ public class ItemService {
 
     public Item createItem(Product product) {
         Item item = new Item(product);
+        return itemRepository.save(item);
+    }
 
+    public Item createItems(Product product, Long quantity) {
+        Item item = new Item(product, quantity);
         return itemRepository.save(item);
     }
 
@@ -41,6 +45,19 @@ public class ItemService {
 
     public List<Item> getAllItems() {
         return itemRepository.findAll();
+    }
+
+    public List<Item> findAllItems() {
+        return itemRepository.findAll();
+    }
+
+    public Item findItemByNameOfProduct(String name) {
+        for (Item item : itemRepository.findAll()) {
+            if (item.getProduct().getName().equals(name)) {
+                return item;
+            }
+        }
+            return null;
     }
 
     // UPDATE

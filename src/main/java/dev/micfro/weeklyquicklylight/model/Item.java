@@ -36,6 +36,12 @@ public class Item {
         quantity = 1L;
         this.product = product;
     }
+
+    public Item(Product product, Long quantity) {
+        dateAddedToStorage = LocalDate.now();
+        this.quantity = quantity;
+        this.product = product;
+    }
 // Getters and Setters
 
 
@@ -70,4 +76,6 @@ public class Item {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+
 }

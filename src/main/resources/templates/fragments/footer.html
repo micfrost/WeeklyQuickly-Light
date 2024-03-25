@@ -20,9 +20,9 @@
 
 <div th:fragment="common-footer" th:align="center">
     <br> <br>
-
     <span>MICHAL FROST &copy; </span> <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2024</span>
 </div>
+
 
 <div th:fragment="footer-customer-sites" th:align="center">
     <div th:insert="~{fragments/footer :: footer}">MICHAL FROST &copy; 2024</div>

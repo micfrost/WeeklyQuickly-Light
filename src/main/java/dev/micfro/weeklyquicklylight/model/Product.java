@@ -31,14 +31,23 @@ public class Product {
     }
 
     // Method
-    public void addItem(Item item) {
+    public void addItem() {
         if (items == null) {
             items = new ArrayList<>();
         }
 
-        items.add(item);
+        items.add(new Item(this));
         quantity = calculateTotalQuantity();
-        item.setProduct(this);
+
+
+    }
+
+    public void addItems(Long itemQuantity) {
+        if (this.items == null) {
+            this.items = new ArrayList<>();
+        }
+        items.add(new Item(this, itemQuantity));
+        quantity = calculateTotalQuantity();
     }
 
     // Constructors

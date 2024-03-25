@@ -31,9 +31,9 @@ public class ProductService {
         Product audi = createProduct("Audi");
 
 
-        iphone.addItem(new Item(iphone));
-        iphone.addItem(new Item(iphone));
-        audi.addItem(new Item(audi));
+        iphone.addItem();
+        iphone.addItem();
+        audi.addItems(5L);
 
         saveProduct(iphone);
         saveProduct(audi);
@@ -62,7 +62,6 @@ public class ProductService {
     public Product getProductByName(String productName) {
         return productRepository.findByName(productName);
     }
-
 
 
     // UPDATE
