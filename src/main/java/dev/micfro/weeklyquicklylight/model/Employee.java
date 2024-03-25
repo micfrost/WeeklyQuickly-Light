@@ -10,7 +10,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String Role = "ROLE_Employee";
+    private String Role = "ROLE_EMPLOYEE";
 
     private String firstName;
 
