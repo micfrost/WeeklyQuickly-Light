@@ -2,8 +2,10 @@ package dev.micfro.weeklyquicklylight.service;
 
 import dev.micfro.weeklyquicklylight.model.Cart;
 import dev.micfro.weeklyquicklylight.model.Customer;
+import dev.micfro.weeklyquicklylight.model.Product;
 import dev.micfro.weeklyquicklylight.repository.CartRepository;
 import dev.micfro.weeklyquicklylight.repository.CustomerRepository;
+import dev.micfro.weeklyquicklylight.repository.ProductRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,16 @@ public class CartService {
 
     private final CartRepository cartRepository;
     private final CustomerRepository customerRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public CartService(CartRepository cartRepository, CustomerRepository customerRepository) {
+    public CartService(CartRepository cartRepository, CustomerRepository customerRepository, ProductRepository productRepository) {
         this.cartRepository = cartRepository;
         this.customerRepository = customerRepository;
+        this.productRepository = productRepository;
     }
+
+
 
     // CRUD
 

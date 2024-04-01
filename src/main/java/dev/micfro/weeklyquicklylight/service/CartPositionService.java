@@ -1,8 +1,15 @@
 package dev.micfro.weeklyquicklylight.service;
 
+import dev.micfro.weeklyquicklylight.model.Cart;
 import dev.micfro.weeklyquicklylight.model.CartPosition;
+import dev.micfro.weeklyquicklylight.model.Product;
 import dev.micfro.weeklyquicklylight.repository.CartPositionRepository;
+import dev.micfro.weeklyquicklylight.repository.CartRepository;
+import dev.micfro.weeklyquicklylight.repository.ProductRepository;
 import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +19,21 @@ import java.util.List;
 public class CartPositionService {
 
     private final CartPositionRepository cartPositionRepository;
+    private final CartRepository cartRepository;
+    private final ProductRepository productRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
 
     @Autowired
-    public CartPositionService(CartPositionRepository cartPositionRepository) {
+    public CartPositionService(CartPositionRepository cartPositionRepository, CartRepository cartRepository, ProductRepository productRepository) {
         this.cartPositionRepository = cartPositionRepository;
+        this.cartRepository = cartRepository;
+        this.productRepository = productRepository;
     }
 
-  
+
 
     // CRUD
 
@@ -26,11 +41,6 @@ public class CartPositionService {
 
     public void saveCartPosition(CartPosition cartPosition) {
         cartPositionRepository.save(cartPosition);
-    }
-
-    public CartPosition createCartPosition() {
-        CartPosition cartPosition = new CartPosition();
-        return cartPositionRepository.save(cartPosition);
     }
 
     // READ
@@ -49,6 +59,7 @@ public class CartPositionService {
     }
 
     // UPDATE
+
 
     // DELETE
 

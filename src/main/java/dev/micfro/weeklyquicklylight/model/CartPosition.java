@@ -14,15 +14,13 @@ public class CartPosition {
     // ManyToOne with Cart - Bidirectional
     @ManyToOne(cascade = {
             CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH},
-            fetch = FetchType.LAZY)
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
     @ManyToOne(cascade = {
             CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH},
-            fetch = FetchType.LAZY)
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -43,8 +41,16 @@ public class CartPosition {
         this.priceOrdered = priceOrdered;
     }
 
+    public CartPosition(Long id, Cart cart, Product product, Integer quantityOrdered, BigDecimal priceOrdered) {
+        this.id = id;
+        this.cart = cart;
+        this.product = product;
+        this.quantityOrdered = quantityOrdered;
+        this.priceOrdered = priceOrdered;
+    }
 
     // Getters and Setters
+
 
     public Long getId() {
         return id;
@@ -54,11 +60,11 @@ public class CartPosition {
         this.id = id;
     }
 
-    public Cart getOrder() {
+    public Cart getCart() {
         return cart;
     }
 
-    public void setOrder(Cart cart) {
+    public void setCart(Cart cart) {
         this.cart = cart;
     }
 
@@ -86,11 +92,5 @@ public class CartPosition {
         this.priceOrdered = priceOrdered;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
 }

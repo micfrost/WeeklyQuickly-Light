@@ -23,14 +23,12 @@ public class AdminController {
 
     @Autowired
     public AdminController(PasswordEncoder passwordEncoder, AdminService adminService) {
-
         this.passwordEncoder = passwordEncoder;
         this.adminService = adminService;
     }
 
     @GetMapping("/admin-list")
     public String listAdmins(Model model) {
-        List<Admin> admins = adminService.findAll();
         model.addAttribute("admins", adminService.findAll());
         return "admin-list";
     }

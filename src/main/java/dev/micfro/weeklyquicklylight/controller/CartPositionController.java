@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class CartController {
+public class CartPositionController {
 
     private final ProductService productService;
     private final CartPositionService cartPositionService;
@@ -18,30 +18,20 @@ public class CartController {
 
 
     @Autowired
-    public CartController(ProductService productService, CartPositionService cartPositionService, CartService cartService) {
+    public CartPositionController(ProductService productService, CartPositionService cartPositionService, CartService cartService) {
         this.productService = productService;
         this.cartPositionService = cartPositionService;
         this.cartService = cartService;
 
-    }
 
-    // CRUD
 
-    // READ
-    @GetMapping("/cart-list")
-    public String cartList(Model model) {
-        model.addAttribute("carts", cartService.findAllCarts());
-        return "cart-list";
     }
 
 
-    // CREATE
-
-
-
-    // UPDATE
-
-    // DELETE
-
+    @GetMapping("/cartposition-list")
+    public String showCartPositions(Model model) {
+        model.addAttribute("cartpositions", cartPositionService.findAllCartPositions());
+        return "cartposition-list";
+    }
 
 }
