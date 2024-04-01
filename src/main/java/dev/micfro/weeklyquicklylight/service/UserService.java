@@ -13,13 +13,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final AuthorityRepository authorityRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
 
-        this.authorityRepository = authorityRepository;
     }
 
     // CRUD

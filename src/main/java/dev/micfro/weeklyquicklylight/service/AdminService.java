@@ -5,7 +5,9 @@ import dev.micfro.weeklyquicklylight.model.Admin;
 import dev.micfro.weeklyquicklylight.model.User;
 import dev.micfro.weeklyquicklylight.repository.AdminRepository;
 import dev.micfro.weeklyquicklylight.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,14 +15,30 @@ import java.util.List;
 @Service
 public class AdminService {
 
-    private final AdminRepository adminRepository;
-    private final UserRepository userRepository;
+    AdminRepository adminRepository;
+    UserRepository userRepository;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AdminService(AdminRepository adminRepository, UserRepository userRepository) {
+    public AdminService(AdminRepository adminRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.adminRepository = adminRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+
+    // init data
+    @PostConstruct
+    public void init() {
+        // password = username
+        String username = "adminmichal";
+        String password = passwordEncoder.encode(username);
+        createAdmin(
+                username,
+                password,
+                "Michal",
+                "Frost");
+    }
+
 
     // CRUD
 
@@ -30,7 +48,7 @@ public class AdminService {
     }
 
 
-    public User createAdmin(
+    public void createAdmin(
             String username,
             String password,
             String firstName,
@@ -40,15 +58,12 @@ public class AdminService {
         User user = new User(username, password, true, authority, admin);
         userRepository.save(user);
 
-        return user;
     }
 
     // Read
     public List<Admin> findAll() {
         return adminRepository.findAll();
     }
-
-
 
 
 }

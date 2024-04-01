@@ -1,42 +1,39 @@
 package dev.micfro.weeklyquicklylight.service;
 
-import dev.micfro.weeklyquicklylight.model.Item;
 import dev.micfro.weeklyquicklylight.model.Product;
 import dev.micfro.weeklyquicklylight.repository.ProductRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final ItemService itemService;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, @Lazy ItemService itemService) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.itemService = itemService;
+
     }
 
 
     // init Data
     @PostConstruct
-
     public void initProducts() {
-        Product iphone = createProduct("Iphone");
-        Product audi = createProduct("Audi");
+        Product dallmayrProdomo500g = createProduct("Dallmayr Prodomo 500g", 4.99);
+        Product cocaCola1l = createProduct("Coca Cola 1l", 0.99);
 
 
-        iphone.addItem();
-        iphone.addItem();
-        audi.addItems(5L);
+        dallmayrProdomo500g.addItem();
+        dallmayrProdomo500g.addItem();
+        cocaCola1l.addItems(5L);
 
-        saveProduct(iphone);
-        saveProduct(audi);
+        saveProduct(dallmayrProdomo500g);
+        saveProduct(cocaCola1l);
     }
 
 
@@ -47,8 +44,8 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public Product createProduct(String productName) {
-        Product product = new Product(productName);
+    public Product createProduct(String productName, double priceRetail) {
+        Product product = new Product(productName, BigDecimal.valueOf(priceRetail));
         return productRepository.save(product);
     }
 
@@ -59,8 +56,16 @@ public class ProductService {
     }
 
 
-    public Product getProductByName(String productName) {
+    public Product findProductByName(String productName) {
         return productRepository.findByName(productName);
+    }
+
+    public Product findProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
+    public Product findProductById(Integer id) {
+        return productRepository.findById(Long.valueOf(id)).orElse(null);
     }
 
 

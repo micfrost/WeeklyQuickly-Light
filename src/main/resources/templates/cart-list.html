@@ -11,23 +11,22 @@
 
         <div class="row">
             <div class="col">
-                <h2>Admin List</h2>
+                <h2>Cart List</h2>
             </div>
         </div>
 
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>Username</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>ID</th>
+                <th>Customer - username</th>
+
             </tr>
             </thead>
             <tbody>
-            <tr th:each="admin : ${admins}">
-                <td th:text="${admin.user.username}"></td>
-                <td th:text="${admin.firstName}"></td>
-                <td th:text="${admin.lastName}"></td>
+            <tr th:each="cart : ${carts}">
+                <td th:text="${cart.id}"></td>
+                <td th:text="${cart.customer.user.username}"></td>
 
             </tr>
             </tbody>
@@ -36,6 +35,7 @@
         <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
 
     </div>
+</div>
 </body>
 
 </html>

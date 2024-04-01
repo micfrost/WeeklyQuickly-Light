@@ -13,12 +13,12 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
-    private final ProductService productService;
+
 
     @Autowired
-    public ItemService(ItemRepository itemRepository, ProductService productService) {
+    public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
-        this.productService = productService;
+
     }
 
 
@@ -42,10 +42,6 @@ public class ItemService {
 
 
     // READ
-
-    public List<Item> getAllItems() {
-        return itemRepository.findAll();
-    }
 
     public List<Item> findAllItems() {
         return itemRepository.findAll();

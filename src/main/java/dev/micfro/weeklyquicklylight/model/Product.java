@@ -2,6 +2,7 @@ package dev.micfro.weeklyquicklylight.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +15,27 @@ public class Product {
 
     private String name;
 
+    private BigDecimal priceRetail;
+
     // OneToMany Bidirectional
     @OneToMany(mappedBy = "product",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Item> items = new ArrayList<>();
 
+    private Long quantityAvailable;
 
-    private Long quantity;
+
+@OneToMany(mappedBy = "product",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+private List<CartPosition> cartPositions;
+
 
 
     // Methods
 
-    public Long calculateTotalQuantity() {
+    public Long calculateTotalQuantityAvailable() {
         return items.stream().mapToLong(Item::getQuantity).sum();
     }
 
@@ -37,25 +46,28 @@ public class Product {
         }
 
         items.add(new Item(this));
-        quantity = calculateTotalQuantity();
+        quantityAvailable = calculateTotalQuantityAvailable();
 
 
     }
 
-    public void addItems(Long itemQuantity) {
+    public void addItems(Long itemQuantityAvailable) {
         if (this.items == null) {
             this.items = new ArrayList<>();
         }
-        items.add(new Item(this, itemQuantity));
-        quantity = calculateTotalQuantity();
+        items.add(new Item(this, itemQuantityAvailable));
+        quantityAvailable = calculateTotalQuantityAvailable();
     }
 
     // Constructors
     public Product() {
     }
 
-    public Product(String name) {
+
+    public Product(String name, BigDecimal priceRetail) {
         this.name = name;
+        this.priceRetail = priceRetail;
+        this.quantityAvailable = 1L;
     }
 // Getters and Setters
 
@@ -83,12 +95,21 @@ public class Product {
         this.items = items;
     }
 
-    public Long getQuantity() {
-        quantity = calculateTotalQuantity();
-        return quantity;
+    public Long getQuantityAvailable() {
+        quantityAvailable = calculateTotalQuantityAvailable();
+        return quantityAvailable;
     }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
+    public void setQuantityAvailable(Long quantityAvailable) {
+        this.quantityAvailable = quantityAvailable;
     }
+
+    public BigDecimal getPriceRetail() {
+        return priceRetail;
+    }
+
+    public void setPriceRetail(BigDecimal priceRetail) {
+        this.priceRetail = priceRetail;
+    }
+
 }

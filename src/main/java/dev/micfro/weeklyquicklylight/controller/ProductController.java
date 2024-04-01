@@ -19,12 +19,16 @@ public class ProductController {
         this.productService = productService;
     }
 
+    // CRUD
+
+    // READ
     @GetMapping("/product-list")
     public String productList(Model model) {
         model.addAttribute("products", productService.findAllProducts());
         return "product-list";
     }
 
+    // CREATE
     @GetMapping("/product-form")
     public String getProductForm(Model model) {
         model.addAttribute("product", new Product());
@@ -33,9 +37,20 @@ public class ProductController {
 
     @PostMapping("/product-form")
     public String postProductForm(@ModelAttribute("product") Product product) {
+        // product.setQuantity(product.calculateTotalQuantity());
+        product.setQuantityAvailable(0L);
         productService.saveProduct(product);
         return "redirect:/product-list";
     }
+
+
+    // UPDATE
+
+    // DELETE
+
+
+
+
 }
 
 

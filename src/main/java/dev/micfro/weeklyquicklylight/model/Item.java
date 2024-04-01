@@ -15,7 +15,7 @@ public class Item {
 
     private LocalDate dateAddedToStorage;
 
-    // ManyToOne relationship with a Product
+
     @ManyToOne(cascade = {
             CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH},

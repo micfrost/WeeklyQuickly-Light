@@ -6,26 +6,36 @@
 <th:block th:replace="~{fragments/header :: common-header}"></th:block>
 <th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
 
-<div th:align="center">
+<div class="container">
+    <div th:align="center">
 
-<h2>Item List</h2>
-<table>
-    <tr>
-        <th>Product Name</th>
-        <th>Quantity</th>
+        <div class="row">
+            <div class="col">
+                <h2>Item List</h2>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
 
 
-    </tr>
-    <tr th:each="item : ${items}">
-        <td th:text="${item.product.name}"></td>
-        <td th:text="${item.quantity}"></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.product.name}"></td>
+                <td th:text="${item.quantity}"></td>
 
-    </tr>
-</table>
+            </tr>
+            </tbody>
+        </table>
 
-<th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
+        <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
 
-</div>
+    </div>
 </body>
 
 </html>

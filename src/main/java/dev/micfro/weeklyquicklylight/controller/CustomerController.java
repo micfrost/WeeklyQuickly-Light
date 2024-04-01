@@ -25,16 +25,8 @@ public class CustomerController {
 
         this.passwordEncoder = passwordEncoder;
         this.customerService = customerService;
-
-        // password = username
-        String username = "customerjulian";
-        String password = passwordEncoder.encode(username);
-        customerService.createCustomer(
-                username,
-                password,
-                "Julian",
-                "Frost");
     }
+
 
     @GetMapping("/customer-list")
     public String listCustomers(Model model) {
@@ -58,7 +50,7 @@ public class CustomerController {
         user.setEnabled(true);
         user.setAuthority(new Authority(user.getUsername(), customer.getRole()));
         // Save Customer
-        customerService.saveCustomer(customer);
+        customerService.save(customer);
         return "redirect:/customer-list";
     }
 }

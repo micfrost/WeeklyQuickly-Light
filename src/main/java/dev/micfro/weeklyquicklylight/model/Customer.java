@@ -2,6 +2,8 @@ package dev.micfro.weeklyquicklylight.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -16,19 +18,25 @@ public class Customer {
 
     private String lastName;
 
-    // Mapping
     @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
     private User user;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
 
     // Constructors
     public Customer() {
         user = new User();
+        cart = new Cart();
     }
 
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        user = new User();
+        cart = new Cart();
     }
 
 
@@ -75,5 +83,13 @@ public class Customer {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

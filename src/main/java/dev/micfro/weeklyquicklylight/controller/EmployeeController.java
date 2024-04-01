@@ -25,15 +25,6 @@ public class EmployeeController {
 
         this.passwordEncoder = passwordEncoder;
         this.employeeService = employeeService;
-
-        // password = username
-        String username = "employeeola";
-        String password = passwordEncoder.encode(username);
-        employeeService.createEmployee(
-                username,
-                password,
-                "Ola",
-                "Frost");
     }
 
     @GetMapping("/employee-list")

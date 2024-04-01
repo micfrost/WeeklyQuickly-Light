@@ -3,10 +3,11 @@ package dev.micfro.weeklyquicklylight.service;
 import dev.micfro.weeklyquicklylight.model.Authority;
 import dev.micfro.weeklyquicklylight.model.Employee;
 import dev.micfro.weeklyquicklylight.model.User;
-import dev.micfro.weeklyquicklylight.repository.AuthorityRepository;
 import dev.micfro.weeklyquicklylight.repository.EmployeeRepository;
 import dev.micfro.weeklyquicklylight.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +17,27 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, UserRepository userRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+
+    // init data
+@PostConstruct
+public void init() {
+    // password = username
+        String username = "employeeola";
+        String password = passwordEncoder.encode(username);
+        createEmployee(
+                username,
+                password,
+                "Ola",
+                "Frost");
+}
 
     // CRUD
 
@@ -31,7 +47,7 @@ public class EmployeeService {
     }
 
 
-    public User createEmployee(
+    public void createEmployee(
             String username,
             String password,
             String firstName,
@@ -41,7 +57,6 @@ public class EmployeeService {
         User user = new User(username, password, true, authority, employee);
         userRepository.save(user);
 
-        return user;
     }
 
     // Read

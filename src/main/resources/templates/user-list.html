@@ -4,31 +4,39 @@
 <th:block th:replace="~{fragments/head :: common-head}"></th:block>
 
 <body>
+<th:block th:replace="~{fragments/header :: common-header}"></th:block>
+<th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
 
-<div th:align="center">
+<div class="container">
+    <div th:align="center">
 
-    <th:block th:replace="~{fragments/header :: common-header}"></th:block>
-    <th:block th:replace="~{fragments/navbar :: common-navbar}"></th:block>
+        <div class="row">
+            <div class="col">
+                <h2>User List</h2>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Roles</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.authority != null ? user.authority.authority : ''}"></td>
 
 
-    <h2>User List</h2>
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>Roles</th>
-        </tr>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.authority.authority}"></td>
+            </tr>
+            </tbody>
+        </table>
 
+        <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
 
-        </tr>
-    </table>
-
-    <th:block th:replace="~{fragments/footer :: common-footer}"></th:block>
-
+    </div>
 </div>
-
 </body>
 
 </html>

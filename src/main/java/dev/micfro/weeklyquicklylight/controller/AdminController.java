@@ -26,15 +26,6 @@ public class AdminController {
 
         this.passwordEncoder = passwordEncoder;
         this.adminService = adminService;
-
-        // password = username
-        String username = "adminmichal";
-        String password = passwordEncoder.encode(username);
-        adminService.createAdmin(
-                username,
-                password,
-                "Michal",
-                "Frost");
     }
 
     @GetMapping("/admin-list")
